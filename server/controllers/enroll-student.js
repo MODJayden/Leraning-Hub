@@ -11,6 +11,13 @@ const EnrollCourse = async (req, res) => {
         message: "All fields are required",
       });
     }
+    const checkSameCourse=await Enrolled.findOne({courseId})
+    if(checkSameCourse){
+      res.status(404).json({
+        success:false,
+        message :"Course has already been enrolled"
+      })
+    }
 
     const newEnrolledCourse = await Enrolled.create({
       courseId,
