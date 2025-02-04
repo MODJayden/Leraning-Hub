@@ -39,6 +39,7 @@ const Enrollment = () => {
          
         });
       } else {
+        navigate("/student/enrolled-courses")
         toast({
           title: "Failed",
           description: res?.payload?.message,
