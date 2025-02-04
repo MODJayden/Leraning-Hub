@@ -1,0 +1,121 @@
+// src/pages/CourseTracking.jsx
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteEnrolledCourse, getEnrolledCourse } from "@/store/enroll";
+import { useEffect } from "react";
+
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useToast } from "@/assets/hooks/use-toast";
+
+const Enrolled = () => {
+  const { enrolledCourse } = useSelector((store) => store.enroll);
+  const { user } = useSelector((store) => store.user);
+  const { toast } = useToast();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getEnrolledCourse({ studentId: user?.id }));
+  }, [dispatch]);
+
+  const handleDropCourse = (id) => {
+    dispatch(deleteEnrolledCourse({ id: id })).then((res) => {
+      if (res?.payload?.success) {
+        dispatch(getEnrolledCourse({ studentId: user?.id }));
+        toast({
+          title: "Success",
+          description: res?.payload?.message,
+        });
+      }
+    });
+  };
+
+  return (
+    <div className="min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-gray-400 text-center mt-4">
+        Your Enrolled Courses
+      </h1>
+      {enrolledCourse?.length >= 1 ? (
+        <main className="container mx-auto p-8 flex-grow">
+          <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {enrolledCourse?.map((course) => (
+              <div
+                key={course.courseId._id}
+                className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col justify-between"
+              >
+                <img
+                  src={course?.courseId?.courseThumbnail}
+                  alt={course?.courseId?.courseTitle}
+                  className="w-full h-40 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold mb-2 text-[#1c1d1f]">
+                    {course?.courseId?.courseTitle}
+                  </h3>
+                  <p className="text-gray-600 mb-2">{course?.studentName}</p>
+                  <div className="w-full flex gap-2">
+                    <Link to={`/enroll/course-materials/${course._id}`}>
+                      <Button
+                        variant="outline"
+                        className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white hover:from-[#2575fc] hover:to-[#6a11cb] w-full"
+                      >
+                        View Materials
+                      </Button>
+                    </Link>
+                    <AlertDialog>
+                      <AlertDialogTrigger>
+                        <Button
+                          variant="outline"
+                          className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white hover:from-[#2575fc] hover:to-[#6a11cb] w-full"
+                        >
+                          Drop Course
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            Are you absolutely sure?
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently
+                            delete the enrolled course.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => handleDropCourse(course?._id)}
+                          >
+                            Continue
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </main>
+      ) : (
+        <div className="text-2xl text-gray-300 text-center">
+          You have not enrolled in any course
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Enrolled;
+
+/*   */
