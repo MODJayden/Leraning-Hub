@@ -3,6 +3,8 @@ import bg from "./bg.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCourse } from "@/store/course";
 import CourseBag from "@/components/CourseBag";
+import { Link } from "react-router-dom";
+
 
 const Home = () => {
   const { allCourses } = useSelector((store) => store.course);
