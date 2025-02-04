@@ -1,5 +1,5 @@
 // src/components/Navbar.jsx
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 import {
   FaHome,
@@ -12,7 +12,6 @@ import {
   FaAssistiveListeningSystems,
   FaPenSquare,
 } from "react-icons/fa";
-
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -40,17 +39,21 @@ const MenuItem = ({ icon, label }) => {
 
 import { useDispatch, useSelector } from "react-redux";
 import { Badge } from "./ui/badge";
-import { logout } from "@/store/user-slice";
+import { logout, resetTokenAndCredential } from "@/store/user-slice";
 import { useState } from "react";
 
 const Navbar = () => {
   const { isAuth, user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [openSheet, setOnOpenSheet] = useState(false);
+  const navigate=useNavigate()
 
   const handleLogout = () => {
-    dispatch(logout()).then(() => {
+    dispatch(resetTokenAndCredential()).then(() => {
       setOnOpenSheet(false);
+      sessionStorage.clear()
+      navigate("/")
+
     });
   };
 

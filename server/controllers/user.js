@@ -83,7 +83,7 @@ const loginUser = async (req, res) => {
       { expiresIn: "60m" }
     );
 
-    if (token) {
+    /* if (token) {
       res.cookie("token", token, { httpOnly: true, secure: true }).json({
         success: true,
         message: "Login successfully",
@@ -96,7 +96,22 @@ const loginUser = async (req, res) => {
           role: user.role,
         },
       });
-    }
+    } */
+    res.json({
+      success:true,
+      message:"Logged in successfully",
+      token,
+      data: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+      },
+
+    })
+
   } catch (error) {
     console.log("Error occurred while logging user", error.message);
      res.status(401).json({

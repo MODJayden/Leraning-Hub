@@ -35,10 +35,10 @@ export const loginUser = createAsyncThunk("/auth/login", async (form ) => {
   return res?.data;
 });
 
-export const checkAuth = createAsyncThunk("/auth/check-auth", async () => {
+export const checkAuth = createAsyncThunk("/auth/check-auth", async (token) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/data/check-auth`, {
-    withCredentials: true,
     headers: {
+      Authorization:`Bearer ${token}`,
       "Cache-control": "must-revalidate,proxy-revalidate,no-cache,no-store",
     },
   });
@@ -62,14 +62,21 @@ const initialState = {
   isAuth: false,
   isLoading: false,
   user: null,
-  password:null
+  password:null,
+  token:null
   
 };
 
 const userSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    resetTokenAndCredential:(state)=>{
+       state.isAuth=false,
+       state.user=null,
+       state.token=null
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -88,6 +95,8 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = action?.payload?.data;
         state.isAuth = true;
+        state.token=action?.payload?.token
+        sessionStorage.setItem("token",JSON.stringify(action?.payload?.token))
       })
       .addCase(loginUser.rejected, (state) => {
         state.isLoading = false;
@@ -132,4 +141,5 @@ const userSlice = createSlice({
   },
 });
 
+export const {resetTokenAndCredential}=userSlice.actions
 export default userSlice.reducer;

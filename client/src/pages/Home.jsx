@@ -85,9 +85,12 @@ const Home = () => {
               courses in programming, business, design, and more.
             </p>
             <div className="flex justify-center space-x-4">
+              <Link to="/courses">
               <button className="bg-[#a435f0] text-white px-6 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Start Learning
               </button>
+              </Link>
+             
             </div>
           </div>
         </div>
