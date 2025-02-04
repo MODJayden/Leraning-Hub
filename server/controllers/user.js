@@ -80,7 +80,7 @@ const loginUser = async (req, res) => {
         role: user.role,
       },
       process.env.SECRET_CODE,
-      { expiresIn: "60m" }
+      { expiresIn: "120m" }
     );
 
     /* if (token) {
