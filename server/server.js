@@ -11,31 +11,37 @@ const courseRouter = require("./Routes/course");
 const assignmentRouter = require("./Routes/assignment");
 const submissionRouter = require("./Routes/submission");
 
-//connect to your database
+// Connect to your database
 connectDB();
 
-//setup cors and cookie parsers
+// Setup CORS and cookie parsers
+const allowedOrigins = [
+  "https://leraning-hubb.onrender.com",
+  "https://leraning-hub-lvch.onrender.com",
+  "http://localhost:5173", // For local development
+];
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://leraning-hub-lvch.onrender.com",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["PUT", "DELETE", "GET", "POST"],
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Cache-Control",
-      "Expires",
-    ],
+    allowedHeaders: ["Content-Type", "Authorization", "Cache-Control", "Expires"],
     credentials: true,
   })
 );
 
-//handle options requests
-app.options('*', cors());
+// Handle OPTIONS requests
+app.options("*", cors());
 
-
-//routes
+// Routes
 app.use("/api/data", userRouter);
 app.use("/api/enrollment", enrollRouter);
 app.use("/api/course", courseRouter);
