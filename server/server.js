@@ -31,6 +31,10 @@ app.use(
   })
 );
 
+//handle options requests
+app.options('*', cors());
+
+
 //routes
 app.use("/api/data", userRouter);
 app.use("/api/enrollment", enrollRouter);
