@@ -1,9 +1,9 @@
 const Enrolled = require("../model/enroll-student");
 
-
 const EnrollCourse = async (req, res) => {
   try {
     const { courseId, studentId, studentName, courseProgress } = req.body;
+    console.log(courseId);
 
     if (!courseId || !studentId || !studentName) {
       return res.status(402).json({
@@ -11,12 +11,17 @@ const EnrollCourse = async (req, res) => {
         message: "All fields are required",
       });
     }
-    const checkSameCourse=await Enrolled.findOne({courseId})
-    if(checkSameCourse){
-      res.status(404).json({
-        success:false,
-        message :"Course has already been enrolled"
-      })
+    const studentEnrollment = await Enrolled.find({ studentId });
+
+    const checkSameCourse = studentEnrollment.some(
+      (course) => course.courseId.toString() === courseId
+    );
+
+    if (checkSameCourse) {
+      return res.status(500).json({
+        success: false,
+        message: "Course has already been enrolled",
+      });
     }
 
     const newEnrolledCourse = await Enrolled.create({
@@ -64,8 +69,6 @@ const fetchAllEnrolledCourse = async (req, res) => {
 const getCurrentEnrolledCourse = async (req, res) => {
   try {
     const { id } = req.params;
-    
-    
 
     const course = await Enrolled.findById(id).populate("courseId");
     if (!course) {
@@ -84,32 +87,65 @@ const getCurrentEnrolledCourse = async (req, res) => {
   }
 };
 
-const deleteEnrolledCourse=async(req,res)=>{
+const deleteEnrolledCourse = async (req, res) => {
   try {
-    const {id}=req.params
+    const { id } = req.params;
 
-    const enrolledCourse=await Enrolled.findByIdAndDelete(id)
-    if(!enrolledCourse){
+    const enrolledCourse = await Enrolled.findByIdAndDelete(id);
+    if (!enrolledCourse) {
       res.status(400).json({
-        success:false,
-        message:"Failed to delete enrolled course"
-      })
+        success: false,
+        message: "Failed to delete enrolled course",
+      });
     }
     res.status(200).json({
-      success:true,
-      message:"Course dropped successfully"
-    })
-    
+      success: true,
+      message: "Course dropped successfully",
+    });
   } catch (error) {
     console.log(error);
-    
   }
-}
+};
+const fetchEnrolledStudent = async (req, res) => {
+  try {
+    const { tutorId } = req.params;
 
+    const enrolledStudents = await Enrolled.find().populate("courseId");
+    
+
+    const filteredStudents = enrolledStudents.filter((student) => {
+      return student.courseId && student.courseId.tutorId.toString() === tutorId;
+    });
+    
+
+
+    if (!filteredStudents || filteredStudents.length === 0) {
+      console.log("No enrolled students found for this tutor");
+      res.status(404).json({
+        success: false,
+        message: "No enrolled students found for this tutor",
+      });
+    } else {
+      console.log("Enrolled students fetched successfully");
+      res.status(200).json({
+        success: true,
+        message: "Enrolled students fetched successfully",
+        data: filteredStudents,
+      });
+    }
+  } catch (error) {
+    console.log("Error fetching enrolled students:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
 
 module.exports = {
   fetchAllEnrolledCourse,
   EnrollCourse,
   getCurrentEnrolledCourse,
-  deleteEnrolledCourse
+  deleteEnrolledCourse,
+  fetchEnrolledStudent,
 };

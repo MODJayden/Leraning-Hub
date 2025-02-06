@@ -36,6 +36,16 @@ export const getCurrentEnrolledCourse = createAsyncThunk(
     return res?.data;
   }
 );
+export const getEnrolledStudent = createAsyncThunk(
+  "/get-enrolled-student",
+  async ({ tutorId }) => {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/enrollment/fetch/enrolled-student/${tutorId}`
+    );
+    
+    return res?.data;
+  }
+);
 
 const initialState = {
   isLoading: false,
@@ -43,6 +53,7 @@ const initialState = {
   enrolledCourse: [],
   deletedCourse: [],
   currentCourse: [],
+  enrolledStudent:[]
 };
 
 const enrollSlice = createSlice({
@@ -88,6 +99,17 @@ const enrollSlice = createSlice({
       })
       .addCase(getCurrentEnrolledCourse.rejected, (state) => {
         (state.isLoading = false), (state.currentCourse = []);
+      })
+      .addCase(getEnrolledStudent.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getEnrolledStudent.fulfilled, (state, action) => {
+        console.log(action.payload);
+        
+        (state.isLoading = false), (state.enrolledStudent = action.payload?.data);
+      })
+      .addCase(getEnrolledStudent.rejected, (state) => {
+        (state.isLoading = false), (state.enrolledStudent = []);
       });
   },
 });

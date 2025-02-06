@@ -26,6 +26,7 @@ import Assessment from "./pages/tutor/Assessment";
 import SpecAssigment from "./pages/student/SpecAssigment";
 import AboutPage from "./pages/About";
 import ContactPage from "./pages/Contact";
+import Student from "./pages/tutor/Student";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App() {
           <Route path="upload" element={<CourseUpload />} />
           <Route path="assignment" element={<CreateAssessment />} />
           <Route path="Assessment/:id" element={<Assessment />} />
+          <Route path="pupil" element={<Student />} />
         </Route>
         {/* Tutor layout */}
 

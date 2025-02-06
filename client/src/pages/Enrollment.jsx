@@ -42,7 +42,7 @@ const Enrollment = () => {
         navigate("/student/enrolled-courses")
         toast({
           title: "Failed",
-          description: res?.payload?.message,
+          description: "You have already enrolled in this course"
         });
       }
     });

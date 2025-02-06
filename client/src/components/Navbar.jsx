@@ -11,7 +11,10 @@ import {
   FaPortrait,
   FaAssistiveListeningSystems,
   FaPenSquare,
+  FaPeopleCarry,
+  FaTeamspeak,
 } from "react-icons/fa";
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -27,6 +30,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+
 
 const MenuItem = ({ icon, label }) => {
   return (
@@ -46,14 +50,13 @@ const Navbar = () => {
   const { isAuth, user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [openSheet, setOnOpenSheet] = useState(false);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(resetTokenAndCredential()).then(() => {
       setOnOpenSheet(false);
-      sessionStorage.clear()
-      navigate("/")
-
+      sessionStorage.clear();
+      navigate("/");
     });
   };
 
@@ -161,6 +164,13 @@ const Navbar = () => {
                       >
                         {" "}
                         <MenuItem icon={<FaTasks />} label="Assignment" />
+                      </Link>
+                      <Link
+                        to={"/tutor/pupil"}
+                        onClick={() => setOnOpenSheet(false)}
+                      >
+                        {" "}
+                        <MenuItem icon={<FaTeamspeak />} label="Students" />
                       </Link>
 
                       <Link
@@ -311,6 +321,16 @@ const Navbar = () => {
                     }
                   >
                     Assignments
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/tutor/pupil"
+                    className={({ isActive }) =>
+                      isActive ? "text-[#a435f0]" : "hover:text-[#a435f0]"
+                    }
+                  >
+                    Students
                   </NavLink>
                 </li>
               </ul>

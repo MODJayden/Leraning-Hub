@@ -158,10 +158,12 @@ const CourseUpload = () => {
       <div className="w-full flex justify-end ">
         <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
           <SheetTrigger>
-            <FaPlusCircle
+            <span className="flex cursor-pointer gap-1 justify-center items-center border rounded-xl p-1 my-4 text-2xl text-[#a435f0]">           <FaPlusCircle
               className="cursor-pointer text-2xl text-[#a435f0]"
               title="Add course"
-            />
+            /> Upload course
+            </span>
+ 
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>
