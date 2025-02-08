@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="container mx-auto text-center">
-        <p>&copy; 2023 Apex, Inc.</p>
+        <p>&copy; 2025 Apex, Inc.</p>
         <ul className="flex justify-center space-x-4 mt-2">
           <li>
             <a href="/terms" className="hover:text-[#a435f0]">

@@ -63,11 +63,11 @@ const Enrolled = () => {
                     {course?.courseId?.courseTitle}
                   </h3>
                   <p className="text-gray-600 mb-2">{course?.studentName}</p>
-                  <div className="w-full flex gap-2">
+                  <div className="w-full flex gap-2  justify-center">
                     <Link to={`/enroll/course-materials/${course._id}`}>
                       <Button
                         variant="outline"
-                        className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white hover:from-[#2575fc] hover:to-[#6a11cb] w-full"
+                        className="bg-[#a435f0] text-white px-3 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         View Materials
                       </Button>
@@ -76,7 +76,7 @@ const Enrolled = () => {
                       <AlertDialogTrigger>
                         <Button
                           variant="outline"
-                          className="bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white hover:from-[#2575fc] hover:to-[#6a11cb] w-full"
+                          className="bg-[#a435f0] text-white px-3 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
                           Drop Course
                         </Button>

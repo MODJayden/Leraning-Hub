@@ -15,11 +15,12 @@ const Student = () => {
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
+  console.log(enrolledStudent);
 
   const filteredCourses = enrolledStudent?.filter(
     (pro) =>
       pro.studentName.toLocaleLowerCase().includes(searchTerm) ||
-      pro.courseId.courseTitle.toLocaleLowerCase().includes(searchTerm) 
+      pro.courseId.courseTitle.toLocaleLowerCase().includes(searchTerm)
   );
 
   useEffect(() => {
@@ -53,6 +54,7 @@ const Student = () => {
             <TableHead>Student Name</TableHead>
             <TableHead>Student Course</TableHead>
             <TableHead>Enrolled Date</TableHead>
+            <TableHead>Course Progress</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -61,6 +63,7 @@ const Student = () => {
               <TableCell>{student?.studentName}</TableCell>
               <TableCell>{student?.courseId?.courseTitle}</TableCell>
               <TableCell>{student?.createdAt.slice(0, 10)}</TableCell>
+              <TableCell>{student?.courseProgress}%</TableCell>
             </TableRow>
           ))}
         </TableBody>

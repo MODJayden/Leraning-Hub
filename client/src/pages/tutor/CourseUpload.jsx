@@ -106,6 +106,11 @@ const CourseUpload = () => {
           title: "Success!",
           description: "Course uploaded successfully.",
         });
+      }else{
+        toast({
+          
+          description: "Verify all fields...",
+        });
       }
     });
   };
