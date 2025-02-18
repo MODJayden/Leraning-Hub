@@ -25,8 +25,8 @@ const allowedOrigins = [
 app.use(express.static(path.join(__dirname, '../client')));
 
 // Serve robots.txt and sitemap.xml from the root
-app.get('/robots.txt', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/robots.txt'));
+app.get('/Robots.txt', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/Robots.txt'));
 });
 
 app.get('/sitemap.xml', (req, res) => {
