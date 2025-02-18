@@ -27,7 +27,7 @@ import SpecAssigment from "./pages/student/SpecAssigment";
 import AboutPage from "./pages/About";
 import ContactPage from "./pages/Contact";
 import Student from "./pages/tutor/Student";
-
+ 
 function App() {
   const dispatch = useDispatch();
   const { user, isAuth } = useSelector((store) => store.user);
@@ -44,7 +44,7 @@ function App() {
        
 
         <Route path="/" element={<Home />} />
-        <Route path="/courses" element={<CourseDetails />} />
+         <Route path="/courses" element={<CourseDetails />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/profile" element={<Profile />} />
