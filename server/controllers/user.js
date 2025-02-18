@@ -65,7 +65,7 @@ const loginUser = async (req, res) => {
 
     const checkPassword = await bcrypt.compare(password, user.password);
     if (!checkPassword) {
-       res.status(404).json({
+      res.status(404).json({
         success: false,
         message: "Wrong password, try again",
       });
@@ -98,9 +98,9 @@ const loginUser = async (req, res) => {
       });
     } */
     res.json({
-      success:true,
-      message:"Logged in successfully",
-      token,
+      success: true,
+      message: "Logged in successfully",
+
       data: {
         id: user._id,
         firstName: user.firstName,
@@ -108,13 +108,12 @@ const loginUser = async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
+        token: token,
       },
-
-    })
-
+    });
   } catch (error) {
     console.log("Error occurred while logging user", error.message);
-     res.status(401).json({
+    res.status(401).json({
       success: false,
       message: "Error occurred while logging user",
     });
@@ -176,4 +175,4 @@ const logout = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, logout,changePassword };
+module.exports = { registerUser, loginUser, logout, changePassword };

@@ -35,8 +35,10 @@ function App() {
   useEffect(() => {
     const token=JSON.parse(sessionStorage.getItem("token"))
     dispatch(checkAuth(token));
+   
   }, [dispatch]);
 
+  
   return (
     <Router>
       <Navbar />
