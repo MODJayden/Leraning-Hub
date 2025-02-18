@@ -29,6 +29,7 @@ app.get('/robots.txt', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/robots.txt'));
 });
 
+
 app.get('/sitemap.xml', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/sitemap.xml'));
 });
