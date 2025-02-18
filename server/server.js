@@ -20,6 +20,18 @@ const allowedOrigins = [
    "http://localhost:5173", // For local development
 ];
 
+app.use(express.static(path.join(__dirname, '../client')));
+
+// Serve robots.txt and sitemap.xml from the root
+app.get('/robots.txt', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/robots.txt'));
+});
+
+app.get('/sitemap.xml', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/sitemap.xml'));
+});
+
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
