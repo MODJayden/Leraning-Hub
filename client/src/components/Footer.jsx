@@ -56,9 +56,9 @@ const Footer = () => {
             </a>
           </li>
           <li>
-            <a href="/contact" className="hover:text-[#a435f0]">
+            <Link to="/contact" className="hover:text-[#a435f0]">
               Contact Us
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
