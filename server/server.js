@@ -10,6 +10,8 @@ const enrollRouter = require("./Routes/enroll");
 const courseRouter = require("./Routes/course");
 const assignmentRouter = require("./Routes/assignment");
 const submissionRouter = require("./Routes/submission");
+const path = require('path');
+
 
 // Connect to your database
 connectDB();
