@@ -17,8 +17,7 @@ connectDB();
 // Setup CORS and cookie parsers
 const allowedOrigins = [
   "https://leraning-hubb.onrender.com",
-  "https://leraning-hub-lvch.onrender.com",
-  "http://localhost:5173", // For local development
+   "http://localhost:5173", // For local development
 ];
 
 app.use(express.json());
