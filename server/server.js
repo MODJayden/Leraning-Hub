@@ -2,14 +2,14 @@ const express = require("express");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const connectDB = require("../server/db/DB");
+const connectDB = require("./db/DB");
 const app = express();
 const PORT = process.env.PORT || 9090;
-const userRouter = require("../server/Routes/user");
-const enrollRouter = require("../server/Routes/enroll");
-const courseRouter = require("../server/Routes/course");
-const assignmentRouter = require("../server/Routes/assignment");
-const submissionRouter = require("../server/Routes/submission");
+const userRouter = require("./Routes/user");
+const enrollRouter = require("./Routes/enroll");
+const courseRouter = require("./Routes/course");
+const assignmentRouter = require("./Routes/assignment");
+const submissionRouter = require("./Routes/submission");
 const path = require('path');
 
 
