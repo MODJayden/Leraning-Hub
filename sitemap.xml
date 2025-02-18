@@ -1,23 +1,92 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
-<url>
-<loc>https://leraning-hubb.onrender.com/</loc>
-<lastmod>2025-02-18T02:17:25+00:00</lastmod>
-<priority>1.00</priority>
-</url>
-<url>
-<loc>https://leraning-hubb.onrender.com/courses</loc>
-<lastmod>2025-02-18T02:25:31+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://leraning-hubb.onrender.com/about</loc>
-<lastmod>2025-02-18T02:25:31+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://leraning-hubb.onrender.com/contact</loc>
-<lastmod>2025-02-18T02:25:31+00:00</lastmod>
-<priority>0.80</priority>
-</url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Home page -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/</loc>
+    <lastmod>2025-02-18T02:17:25+00:00</lastmod>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- Courses page -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/courses</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- About page -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/about</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Contact page -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/contact</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Profile page -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/profile</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Course details page -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/course/:id</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Enrollment page -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/enroll/:id</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Student layout pages -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/student</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://leraning-hubb.onrender.com/student/performance</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://leraning-hubb.onrender.com/student/enrolled-courses</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Tutor layout pages -->
+  <url>
+    <loc>https://leraning-hubb.onrender.com/tutor</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://leraning-hubb.onrender.com/tutor/upload</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://leraning-hubb.onrender.com/tutor/assignment</loc>
+    <lastmod>2025-02-18T02:25:31+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
 </urlset>
+
+
