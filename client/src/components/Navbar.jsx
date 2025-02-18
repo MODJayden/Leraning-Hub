@@ -31,7 +31,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-
 const MenuItem = ({ icon, label }) => {
   return (
     <div className="flex items-center p-3 hover:bg-gray-100 rounded-lg cursor-pointer transition-colors duration-200">
@@ -54,8 +53,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(resetTokenAndCredential()).then(() => {
-      setOnOpenSheet(false);
       sessionStorage.clear();
+      setOnOpenSheet(false);
       navigate("/");
     });
   };
