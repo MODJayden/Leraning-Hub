@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/client/src/assets/pic.png " />
+    <link rel="icon" href="/client/src/assets/pic.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Welcome to Learning Hub! Explore our comprehensive resources and tutorials to enhance your skills and knowledge."
     />
     <link rel="canonical" href="https://leraning-hubb.onrender.com/" />
-    <!-- Canonical link tag -->
+    <!-- Open Graph / Social Meta Tags -->
     <meta
       property="og:title"
       content="Learning Hub - Your Gateway to Knowledge"
@@ -22,10 +22,26 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Learning Hub" />
     <meta property="og:locale" content="en_US" />
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Learning Hub",
+        "url": "https://leraning-hubb.onrender.com/",
+        "description": "Welcome to Learning Hub! Explore our comprehensive resources and tutorials to enhance your skills and knowledge.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://leraning-hubb.onrender.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
     <title>Learning Hub</title>
   </head>
-  <body  >
+  <body>
     <div id="root"></div>
+    <!-- Hidden Content for SEO -->
     <div style="display: none;">
       <h1>Welcome to Learning Hub</h1>
       <h2>Explore Our Courses</h2>
@@ -33,15 +49,15 @@
         Discover a wide range of courses designed to help you learn new skills
         and advance your career.
       </p>
-      <a href="/courses">View All Courses</a>
+      <a href="https://leraning-hubb.onrender.com/courses">View All Courses</a>
       <h2>Why Choose Us?</h2>
       <p>
         We offer expert instructors, hands-on projects, and a supportive
         learning community.
       </p>
-      <a href="/about">Learn More About Us</a>
+      <a href="https://leraning-hubb.onrender.com/about">Learn More About Us</a>
       <p>Have questions? We'd love to hear from you!</p>
-      <a href="/contact">Contact Us</a>
+      <a href="https://leraning-hubb.onrender.com/contact">Contact Us</a>
     </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
