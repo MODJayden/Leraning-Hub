@@ -64,11 +64,13 @@ const fetchSubmissionForTutor = async (req, res) => {
     const { tutorId } = req.params;
     console.log(tutorId);
 
-    const submissions = await Submission.find().populate("assignmentId");
-
+    const submissions = await Submission.find().populate([
+      { path: 'studentId', model: 'user' },
+      { path: 'assignmentId', model: 'Assignment' }
+    ]);
+    
     const submission = submissions.filter((ass) => ass.assignmentId.tutorId === tutorId);
-    console.log(submission);
-
+ 
     /*   .populate({
         path: "assignmentId",
         populate: {
