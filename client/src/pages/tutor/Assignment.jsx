@@ -82,8 +82,8 @@ const CreateAssessment = () => {
             {filteredCourses?.map((submission, index) => (
               <TableRow key={index}>
                 <TableCell>
-                  {submission?.studentId.firstName}{" "}
-                  {submission?.studentId.lastName}
+                  {submission?.studentId?.firstName}{" "}
+                  {submission?.studentId?.lastName}
                 </TableCell>
                 <TableCell>{submission?.assignmentId?.title}</TableCell>
                 <TableCell>
