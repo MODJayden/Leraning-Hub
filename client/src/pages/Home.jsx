@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import bg from "./bg.jpg";
+import bg from "./bg.avif";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllCourse } from "@/store/course";
 import CourseBag from "@/components/CourseBag";
