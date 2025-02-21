@@ -62,9 +62,14 @@ const fetchSubmissionForStudent = async (req, res) => {
 const fetchSubmissionForTutor = async (req, res) => {
   try {
     const { tutorId } = req.params;
+    console.log(tutorId);
 
-    const submissions = await Submission.find()
-      .populate({
+    const submissions = await Submission.find().populate("assignmentId");
+
+    const submission = submissions.filter((ass) => ass.assignmentId.tutorId === tutorId);
+    console.log(submission);
+
+    /*   .populate({
         path: "assignmentId",
         populate: {
           path: "enrolledId",
@@ -76,9 +81,9 @@ const fetchSubmissionForTutor = async (req, res) => {
         path: "assignmentId.enrolledId",
         model: "enroll-course",
       })
-      .populate("studentId");
+      .populate("studentId"); */
 
-    if (!submissions) {
+    if (!submission) {
       res.status(400).json({
         success: false,
         message: "Failed to fetch submission",
@@ -87,7 +92,7 @@ const fetchSubmissionForTutor = async (req, res) => {
     res.json({
       success: true,
       message: " all submitted assignment fetched successfully",
-      data: submissions,
+      data: submission,
     });
   } catch (error) {
     console.error(error);
@@ -105,8 +110,6 @@ const gradeAssignment = async (req, res) => {
     const submission = await Submission.findById(submissionId);
     const enrolled = await Enrolled.find({ studentId });
     const SpecAssignment = await Assignment.findById(submission.assignmentId);
-    
-    
 
     submission.grade = grade;
     submission.status = "graded";
@@ -119,10 +122,10 @@ const gradeAssignment = async (req, res) => {
 
     if (enrolledCourse) {
       // Update the course progress for the enrolled course
-      enrolledCourse.courseProgress = Number(enrolledCourse.courseProgress) + Number(grade);
+      enrolledCourse.courseProgress =
+        Number(enrolledCourse.courseProgress) + Number(grade);
       await enrolledCourse.save();
     }
-    
 
     res.json({
       success: true,

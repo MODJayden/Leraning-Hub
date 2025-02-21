@@ -70,7 +70,7 @@ const loginUser = async (req, res) => {
         message: "Wrong password, try again",
       });
     }
-    const token = jwt.sign(
+    const token =await jwt.sign(
       {
         id: user._id,
         firstName: user.firstName,
@@ -100,7 +100,7 @@ const loginUser = async (req, res) => {
     res.json({
       success: true,
       message: "Logged in successfully",
-
+      token,
       data: {
         id: user._id,
         firstName: user.firstName,

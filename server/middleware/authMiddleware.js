@@ -5,6 +5,7 @@ const authMiddleware = async (req, res, next) => {
     // Log the entire headers object
  
     const authHeader = req?.headers?.authorization;
+    
  
     if (!authHeader) {
       return res.status(401).json({
