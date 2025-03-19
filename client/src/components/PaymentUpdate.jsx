@@ -9,12 +9,12 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-import { updatePaymentStatus } from "@/store/enroll";
-import { useDispatch } from "react-redux";
+import { getEnrolledStudent, updatePaymentStatus } from "@/store/enroll";
+import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@/assets/hooks/use-toast";
-
 const PaymentUpdate = ({ enrollId, setOpen }) => {
   const [payment, setPayment] = useState("");
+  const { user }= useSelector((state) => state.user);
   const { toast } = useToast();
   const dispatch = useDispatch();
   const id = enrollId;
@@ -28,6 +28,7 @@ const PaymentUpdate = ({ enrollId, setOpen }) => {
           title: "Success",
           description: "Payment status updated successfully",
         });
+        dispatch(getEnrolledStudent({ tuturId:user.id }));
         setOpen(false);
         setPayment("");
       }else{
@@ -35,6 +36,7 @@ const PaymentUpdate = ({ enrollId, setOpen }) => {
           title: "Error",
           description: "Something went wrong",
         });
+
       }
     });
   };
