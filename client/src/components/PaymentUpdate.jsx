@@ -1,0 +1,68 @@
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogContent,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "./ui/button";
+import { updatePaymentStatus } from "@/store/enroll";
+import { useDispatch } from "react-redux";
+import { useToast } from "@/assets/hooks/use-toast";
+
+const PaymentUpdate = ({ enrollId, setOpen }) => {
+  const [payment, setPayment] = useState("");
+  const { toast } = useToast();
+  const dispatch = useDispatch();
+  const id = enrollId;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(updatePaymentStatus({ id, payment })).then((res) => {
+      if (res?.payload.success) {
+        toast({
+          title: "Success",
+          description: "Payment status updated successfully",
+        });
+        setOpen(false);
+        setPayment("");
+      }else{
+        toast({
+          title: "Error",
+          description: "Something went wrong",
+        });
+      }
+    });
+  };
+
+  return (
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Update Payment Status</DialogTitle>
+        <DialogDescription>
+          Please confirm the updated payment status. <br />
+          <select
+            name="payment"
+            value={payment}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 m-2"
+            onChange={(e) => setPayment(e.target.value)}
+            id=""
+          >
+            <option value="">Select payment status</option>
+            <option value="paid">paid</option>
+            <option value="unpaid">unpaid</option>
+          </select>
+        </DialogDescription>
+        <DialogFooter>
+          <Button onClick={handleSubmit}>Save</Button>
+        </DialogFooter>
+      </DialogHeader>
+    </DialogContent>
+  );
+};
+
+export default PaymentUpdate;

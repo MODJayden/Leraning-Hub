@@ -12,7 +12,9 @@ export const getEnrolledCourse = createAsyncThunk(
   "/download materials-course",
   async ({ studentId }) => {
     const res = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/enrollment/get/enrolled-course/${studentId}`
+      `${
+        import.meta.env.VITE_API_URL
+      }/api/enrollment/get/enrolled-course/${studentId}`
     );
     return res?.data;
   }
@@ -21,7 +23,9 @@ export const deleteEnrolledCourse = createAsyncThunk(
   "/delete/enrolled-course",
   async ({ id }) => {
     const res = await axios.delete(
-      `${import.meta.env.VITE_API_URL}/api/enrollment/delete/enrolled-course/${id}`
+      `${
+        import.meta.env.VITE_API_URL
+      }/api/enrollment/delete/enrolled-course/${id}`
     );
     return res?.data;
   }
@@ -30,9 +34,11 @@ export const getCurrentEnrolledCourse = createAsyncThunk(
   "/getCurrent-enrolled-course",
   async ({ id }) => {
     const res = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/enrollment/getCurrent/enrolled-course/${id}`
+      `${
+        import.meta.env.VITE_API_URL
+      }/api/enrollment/getCurrent/enrolled-course/${id}`
     );
-    
+
     return res?.data;
   }
 );
@@ -40,9 +46,24 @@ export const getEnrolledStudent = createAsyncThunk(
   "/get-enrolled-student",
   async ({ tutorId }) => {
     const res = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/enrollment/fetch/enrolled-student/${tutorId}`
+      `${
+        import.meta.env.VITE_API_URL
+      }/api/enrollment/fetch/enrolled-student/${tutorId}`
     );
-    
+
+    return res?.data;
+  }
+);
+export const updatePaymentStatus = createAsyncThunk(
+  "/update-payment-status",
+  async ({ id, payment }) => {
+    const res = await axios.put(
+      `${
+        import.meta.env.VITE_API_URL
+      }/api/enrollment/update/payment-status/${id}`,
+      { payment }
+    );
+
     return res?.data;
   }
 );
@@ -53,7 +74,8 @@ const initialState = {
   enrolledCourse: [],
   deletedCourse: [],
   currentCourse: [],
-  enrolledStudent:[]
+  enrolledStudent: [],
+  paymentStatus: null,
 };
 
 const enrollSlice = createSlice({
@@ -85,8 +107,7 @@ const enrollSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(deleteEnrolledCourse.fulfilled, (state, action) => {
-        (state.isLoading = false),
-          (state.deletedCourse = action.payload?.data);
+        (state.isLoading = false), (state.deletedCourse = action.payload?.data);
       })
       .addCase(deleteEnrolledCourse.rejected, (state) => {
         (state.isLoading = false), (state.deletedCourse = []);
@@ -105,11 +126,21 @@ const enrollSlice = createSlice({
       })
       .addCase(getEnrolledStudent.fulfilled, (state, action) => {
         console.log(action.payload);
-        
-        (state.isLoading = false), (state.enrolledStudent = action.payload?.data);
+
+        (state.isLoading = false),
+          (state.enrolledStudent = action.payload?.data);
       })
       .addCase(getEnrolledStudent.rejected, (state) => {
         (state.isLoading = false), (state.enrolledStudent = []);
+      })
+      .addCase(updatePaymentStatus.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updatePaymentStatus.fulfilled, (state, action) => {
+        (state.isLoading = false), (state.paymentStatus = action.payload?.data);
+      })
+      .addCase(updatePaymentStatus.rejected, (state) => {
+        (state.isLoading = false), (state.paymentStatus = null);
       });
   },
 });

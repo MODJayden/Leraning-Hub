@@ -2,7 +2,7 @@ const Enrolled = require("../model/enroll-student");
 
 const EnrollCourse = async (req, res) => {
   try {
-    const { courseId, studentId, studentName, courseProgress } = req.body;
+    const { courseId, studentId, studentName, courseProgress,payment } = req.body;
     console.log(courseId);
 
     if (!courseId || !studentId || !studentName) {
@@ -29,6 +29,7 @@ const EnrollCourse = async (req, res) => {
       studentId,
       studentName,
       courseProgress,
+      payment
     });
     if (!newEnrolledCourse) {
       res.status(404).json({
@@ -142,10 +143,45 @@ const fetchEnrolledStudent = async (req, res) => {
   }
 };
 
+const updatePaymentStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { payment } = req.body;
+    
+
+    const updatedEnrollment = await Enrolled.findByIdAndUpdate(
+      id,
+      { payment },
+      { new: true }
+    );
+
+    if (!updatedEnrollment) {
+      return res.status(404).json({
+        success: false,
+        message: "Enrollment not found",
+        
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Payment status updated successfully",
+      data: updatedEnrollment,
+    });
+  } catch (error) {
+    console.error("Error updating payment status:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
 module.exports = {
   fetchAllEnrolledCourse,
   EnrollCourse,
   getCurrentEnrolledCourse,
   deleteEnrolledCourse,
   fetchEnrolledStudent,
+  updatePaymentStatus
 };

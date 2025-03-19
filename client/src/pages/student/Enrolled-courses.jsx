@@ -63,44 +63,115 @@ const Enrolled = () => {
                     {course?.courseId?.courseTitle}
                   </h3>
                   <p className="text-gray-600 mb-2">{course?.studentName}</p>
+                  <p className="text-gray-600 mb-4">
+                    Payment Status:{" "}
+                    <span
+                      className={`${
+                        course?.payment === "unpaid"
+                          ? "bg-yellow-100 p-1 px-4 rounded-2xl"
+                          : "bg-green-200 p-1 px-4 rounded-2xl"
+                      }`}
+                    >
+                      {course.payment.toUpperCase()}{" "}
+                    </span>
+                  </p>
                   <div className="w-full flex gap-2  justify-center">
-                    <Link to={`/enroll/course-materials/${course._id}`}>
+                    {course?.payment === "unpaid" ? (
                       <Button
                         variant="outline"
                         className="bg-[#a435f0] text-white px-3 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        disabled={true}
                       >
                         View Materials
                       </Button>
-                    </Link>
-                    <AlertDialog>
-                      <AlertDialogTrigger>
+                    ) : (
+                      <Link to={`/enroll/course-materials/${course._id}`}>
                         <Button
                           variant="outline"
                           className="bg-[#a435f0] text-white px-3 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
-                          Drop Course
+                          View Materials
                         </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>
-                            Are you absolutely sure?
-                          </AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete the enrolled course.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => handleDropCourse(course?._id)}
+                      </Link>
+                    )}
+                    {course?.payment === "unpaid" ? (
+                      <AlertDialog>
+                        <AlertDialogTrigger>
+                          <Button
+                            variant="outline"
+                            className="bg-[#a435f0] text-white px-3 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                           >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                            Register
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>PAYMENT DETAILS</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              <p>
+                                Network: <strong>MTN</strong>
+                              </p>
+                              <br />
+                              <p>
+                                MOMO ACCOUNT: <strong>0257479336</strong>{" "}
+                              </p>
+                              <br />
+                              <p>
+                                ACCOUNT NAME: <strong>CHARLES MANTEY</strong>{" "}
+                              </p>
+                              <br />
+                              <p>
+                                REGISTRATION FEE: <strong>GHS100</strong>{" "}
+                              </p>
+                              <br />
+                              <p>
+                                REFERENCE: <strong>Your NAME</strong>{" "}
+                              </p>{" "}
+                              <br />
+                              Note:
+                              <strong className="text-red-300">
+                                {" "}
+                                PAYMENT WILL BE CONFIRMED SOON
+                              </strong>
+                              <p></p>
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    ) : (
+                      <AlertDialog>
+                        <AlertDialogTrigger>
+                          <Button
+                            variant="outline"
+                            className="bg-[#a435f0] text-white px-3 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          >
+                            Drop Course
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>
+                              Are you absolutely sure?
+                            </AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will
+                              permanently delete the enrolled course.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => handleDropCourse(course?._id)}
+                            >
+                              Continue
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    )}
                   </div>
                 </div>
               </div>

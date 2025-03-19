@@ -16,6 +16,7 @@ const Enrollment = () => {
     studentName: user?.firstName.concat( user?.lastName)  ,
     courseId: id,
     studentId: user?.id,
+    payment:"unpaid"
   });
 
   const handleChange = (e) => {

@@ -14,6 +14,11 @@ const enrollCourseSchema = new Schema(
       type: Number,
       default: 0,
     },
+    payment:{
+      type:String,
+      enum:["paid","unpaid"],
+      default:"unpaid"
+    }
   },
   { timestamps: true }
 );

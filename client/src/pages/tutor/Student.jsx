@@ -1,6 +1,9 @@
 import { getEnrolledStudent } from "@/store/enroll";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+
 import {
   Table,
   TableBody,
@@ -9,13 +12,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import PaymentUpdate from "@/components/PaymentUpdate";
 
 const Student = () => {
   const { enrolledStudent } = useSelector((store) => store.enroll);
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  console.log(enrolledStudent);
+  const [enrollId,setEnrollId] = useState(null)
 
   const filteredCourses = enrolledStudent?.filter(
     (pro) =>
@@ -29,6 +35,7 @@ const Student = () => {
     });
   }, [dispatch]);
 
+  
   return (
     <div className="p-6 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">Enrolled Students</h1>
@@ -64,6 +71,12 @@ const Student = () => {
               <TableCell>{student?.courseId?.courseTitle}</TableCell>
               <TableCell>{student?.createdAt.slice(0, 10)}</TableCell>
               <TableCell>{student?.courseProgress}%</TableCell>
+              <TableCell>
+                <Dialog open={open} onOpenChange={setOpen} >
+                  <DialogTrigger onClick={()=>setEnrollId(student?._id)} className="bg-black text-white py-1 px-3 rounded-lg">Update</DialogTrigger>
+                   <PaymentUpdate enrollId={enrollId} setOpen={setOpen} />
+                </Dialog>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
