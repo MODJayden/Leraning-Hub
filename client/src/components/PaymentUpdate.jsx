@@ -18,6 +18,7 @@ const PaymentUpdate = ({ enrollId, setOpen }) => {
   const { toast } = useToast();
   const dispatch = useDispatch();
   const id = enrollId;
+  const tutorId =user.id
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const PaymentUpdate = ({ enrollId, setOpen }) => {
           title: "Success",
           description: "Payment status updated successfully",
         });
-        dispatch(getEnrolledStudent({ tuturId:user.id }));
+        dispatch(getEnrolledStudent({ tutorId}));
         setOpen(false);
         setPayment("");
       }else{
