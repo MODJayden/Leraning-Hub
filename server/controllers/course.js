@@ -16,6 +16,7 @@ const handleUploadCourseImage = async (req, res) => {
     res.json({ success: false, message: "Error occured" });
   }
 };
+
 const handleUploadCourseThumbnail = async (req, res) => {
   try {
     const file = req.file;

@@ -10,8 +10,7 @@ const enrollRouter = require("./Routes/enroll");
 const courseRouter = require("./Routes/course");
 const assignmentRouter = require("./Routes/assignment");
 const submissionRouter = require("./Routes/submission");
-const path = require('path');
-
+const path = require("path");
 
 // Connect to your database
 connectDB();
@@ -19,37 +18,29 @@ connectDB();
 // Setup CORS and cookie parsers
 const allowedOrigins = [
   "https://leraning-hubb.onrender.com",
-   "http://localhost:5173", // For local development
+  "http://localhost:5173", // For local development
 ];
 
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, "../client")));
 
 // Serve robots.txt and sitemap.xml from the root
-app.get('/robots.txt', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/robots.txt'));
+app.get("/robots.txt", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/robots.txt"));
 });
 
-
-app.get('/sitemap.xml', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/sitemap.xml'));
+app.get("/sitemap.xml", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/sitemap.xml"));
 });
-
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["PUT", "DELETE", "GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization", "Cache-Control", "Expires"],
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "cache-control"],
     credentials: true,
-  })
+  }),
 );
 
 // Handle OPTIONS requests

@@ -83,20 +83,7 @@ const loginUser = async (req, res) => {
       { expiresIn: "360m" }
     );
 
-    /* if (token) {
-      res.cookie("token", token, { httpOnly: true, secure: true }).json({
-        success: true,
-        message: "Login successfully",
-        data: {
-          id: user._id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          phone: user.phone,
-          role: user.role,
-        },
-      });
-    } */
+    
     res.json({
       success: true,
       message: "Logged in successfully",
