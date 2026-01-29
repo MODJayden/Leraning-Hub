@@ -12,6 +12,8 @@ const assignmentRouter = require("./Routes/assignment");
 const submissionRouter = require("./Routes/submission");
 const path = require("path");
 
+const CronJob = require("./cron/cron");
+
 // Connect to your database
 connectDB();
 
@@ -31,6 +33,7 @@ app.get("/robots.txt", (req, res) => {
 app.get("/sitemap.xml", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/sitemap.xml"));
 });
+CronJob.start();
 
 app.use(express.json());
 app.use(cookieParser());
